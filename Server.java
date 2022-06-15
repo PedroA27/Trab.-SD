@@ -13,7 +13,7 @@ public class Server implements PartRepository{
 			
 			System.out.println("Servidor levantou");
 		} catch (RemoteException |MalformedURLException e) {
-			// TODO Auto-generated catch block
+			// TODO Auto-generated catch blo
 			e.printStackTrace();
 		}
 	}
