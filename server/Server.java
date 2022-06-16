@@ -1,8 +1,11 @@
+package server;
 import java.net.MalformedURLException;
 import java.rmi.Naming;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
+import java.util.LinkedList;
+
 
 public class Server implements PartRepository{
 	public static void main(String[] args) {
@@ -16,5 +19,11 @@ public class Server implements PartRepository{
 			// TODO Auto-generated catch blo
 			e.printStackTrace();
 		}
+	}
+
+	@Override
+	public LinkedList<Part> getConj() throws RemoteException {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

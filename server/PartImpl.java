@@ -1,12 +1,10 @@
+package server;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.LinkedList;
 import java.util.UUID;
 
 public class PartImpl extends UnicastRemoteObject implements Part{
-	
-	
-	
 
 	private static final long serialVersionUID = 1L;//seria o id?
 	private String name;
