@@ -1,7 +1,13 @@
-import java.util.LinkedList;
+package server;
+
+import java.util.Collection;
+import java.util.UUID;
 import java.rmi.RemoteException;
 
 public interface PartRepository {
-	LinkedList<Part> getConj() throws RemoteException;
-
+	Part getPart(UUID id) throws RemoteException;
+	String getName() throws RemoteException;
+	int getPartsQuantity() throws RemoteException;
+	Collection<Part> listParts() throws RemoteException;
+	void addPart(Part part) throws RemoteException;
 }

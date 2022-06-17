@@ -23,4 +23,16 @@ public class ServerConfiguration {
         Params = (EnumMap<ServerParamTypes, String>) Collections.unmodifiableMap(paramsMap);
 
      }
+     public String GetFullUrl(){
+        return "rmi://"+GetUrl()+":"+GetPort()+"/"+GetName();
+     }
+     public String GetName(){
+        return Params.get(ServerParamTypes.NAME);
+     }
+     public int GetPort(){
+        return Integer.parseInt(Params.get(ServerParamTypes.PORT));
+     }
+     public String GetUrl(){
+        return Params.get(ServerParamTypes.URL);
+     }
 }
