@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="pt"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ClientSimulator.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">muitas_parts</a> &gt; <a href="index.source.html" class="el_package">sys.admin.client</a> &gt; <span class="el_source">ClientSimulator.java</span></div><h1>ClientSimulator.java</h1><pre class="source lang-java linenums">package sys.admin.client;
+
+
+import java.net.MalformedURLException;
+import java.rmi.Naming;
+import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
+import java.util.Collection;
+import java.util.LinkedList;
+
+import sys.admin.server.Server.Interfaces.Part;
+import sys.admin.server.Server.Interfaces.PartRepository;
+import sys.admin.server.Server.Interfaces.SubPartElement;
+
+
+
+<span class="nc" id="L17">public class ClientSimulator {</span>
+    public static void main(String[]args) throws MalformedURLException, RemoteException, NotBoundException{
+<span class="nc" id="L19">        PartRepository repository1 = (PartRepository) Naming.lookup(&quot;rmi://localhost:1099/serv3&quot;);</span>
+<span class="nc" id="L20">        PartRepository repository2 = (PartRepository) Naming.lookup(&quot;rmi://localhost:1098/serv2&quot;);</span>
+<span class="nc" id="L21">        PartRepository repository3 = (PartRepository) Naming.lookup(&quot;rmi://localhost:1097/serv1&quot;);</span>
+<span class="nc" id="L22">        Part p1 = repository1.addPart(&quot;p1&quot;, &quot;p1 serv1&quot;, null, null);</span>
+<span class="nc" id="L23">        Collection&lt;Integer&gt; list1 =  new LinkedList&lt;&gt;();</span>
+<span class="nc" id="L24">        Collection&lt;Part&gt; list2 =  new LinkedList&lt;&gt;();</span>
+<span class="nc" id="L25">        list1.add(3);</span>
+<span class="nc" id="L26">        list2.add(p1);</span>
+<span class="nc" id="L27">        p1.setName(&quot;p1 serv1 modified&quot;);</span>
+<span class="nc" id="L28">        Part p2 = repository2.addPart(&quot;p2&quot;, &quot;p2 serv2&quot;, list2, list1);</span>
+<span class="nc" id="L29">        Part p3 = repository3.addPart(&quot;p3&quot;, &quot;p3 serv 3&quot;, list2, list1);</span>
+
+<span class="nc" id="L31">        Part p234 = repository3.getPart(p3.getPartId());</span>
+<span class="nc bnc" id="L32" title="All 2 branches missed.">        for(SubPartElement s : p234.getSubParts()){</span>
+<span class="nc" id="L33">            System.out.println(s.getSubPart().getName());</span>
+<span class="nc" id="L34">            System.out.println(s.getSubPartQuantity());</span>
+<span class="nc" id="L35">        }</span>
+        // repository2.
+
+<span class="nc" id="L38">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.4.201905082037</span></div></body></html>
