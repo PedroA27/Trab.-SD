@@ -5,6 +5,7 @@ import java.rmi.RemoteException;
 import java.util.LinkedList;
 import java.util.UUID;
 
+//Interface de Part	
 public interface Part extends Remote{
 	public String getName() throws RemoteException;
 	public UUID getPartId() throws RemoteException;

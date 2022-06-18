@@ -9,6 +9,7 @@ import java.util.UUID;
 import sys.admin.server.Server.Interfaces.Part;
 import sys.admin.server.Server.Interfaces.SubPartElement;
 
+//Implementação da interface Part
 public class PartImpl implements Part, Serializable{
 
 	private static final long serialVersionUID = 1L;//seria o id?
@@ -20,6 +21,8 @@ public class PartImpl implements Part, Serializable{
 	protected PartImpl() throws RemoteException {
 		super();
 	}
+	//Construtor, recebendo nome, descrição e uma coleção de subparts, atribuindo-os ao objeto Par,
+	//e criando um id único com a classe UUID
 	public PartImpl(String name, String description, Collection<SubPartElement> subParts) throws RemoteException{
 		super();
 		this.name = name;
@@ -28,31 +31,31 @@ public class PartImpl implements Part, Serializable{
 		this.subParts = new LinkedList<>();
 		this.subParts.addAll(subParts);
 	}
-
+	//método para retornar as subParts de um Part
 	@Override
 	public LinkedList<SubPartElement> getSubParts() throws RemoteException{
 		return this.subParts;
 	}
-
+	//retorna o nome da Part
 	@Override
 	public String getName() throws RemoteException {
 		return this.name;
 	}
 
 
-
+	//retorna a descrição da Part
 	@Override
 	public String getDescription() {
 		return description;
 	}
 
-	
-
+	//retorna o id da Part
 	@Override
 	public UUID getPartId() {
 		return id;
 	}
 
+	@Override
 	public int hashCode() {
         return id.hashCode();
     }
@@ -68,11 +71,14 @@ public class PartImpl implements Part, Serializable{
 		PartImpl other = (PartImpl) obj;
 		return other.id != this.id;
 	}
+
+	//setter for changing Part name
 	@Override
 	public void setName(String name) {
 		this.name = name;
 		
 	}
+	//setter for changing Part description
 	@Override
 	public void setDescription(String description) {
 		this.description = description;		

@@ -6,6 +6,7 @@ import java.util.UUID;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 
+//interface de PartRepository
 public interface PartRepository extends Remote{
 	Part getPart(UUID id) throws RemoteException;
 	String getName() throws RemoteException;

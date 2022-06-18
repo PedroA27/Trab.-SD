@@ -1,5 +1,6 @@
 package sys.admin.server.Server.ServerConfiguration;
 
+//enum com os parâmetros do servidor e seus respectivos tipos
 public enum ServerParamTypes {  
 
     PORT(Integer.class),
