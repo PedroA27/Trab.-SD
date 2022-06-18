@@ -47,6 +47,21 @@ public class Server extends UnicastRemoteObject implements PartRepository{
 
 	@Override
 	public Part addPart(String nome, String descricao, Collection<Part> subParts, Collection<Integer> subPartsQuantity) throws RemoteException {			
+		LinkedList<SubPartElement> subPartsList = convertToSubElementList(subParts, subPartsQuantity);
+		Part part = new PartImpl(nome, descricao, subPartsList);
+		partRepository.put(part.getPartId(), part);
+		return part;
+	}
+
+	@Override
+	public void addSubPartsToPart(UUID partID, Collection<Part> subParts, Collection<Integer> subPartsQuantity)
+			throws RemoteException {
+		LinkedList<SubPartElement> subPartsList = convertToSubElementList(subParts, subPartsQuantity);
+		Part part = partRepository.get(partID);
+		part.getSubParts().addAll(subPartsList);
+	}
+
+	private LinkedList<SubPartElement> convertToSubElementList(Collection<Part> subParts, Collection<Integer> subPartsQuantity){
 		LinkedList<SubPartElement> subPartsList = new LinkedList<>();
 		if(subParts != null && subPartsQuantity != null){			
 			int length = subParts.size() < subPartsQuantity.size() ? subParts.size() : subPartsQuantity.size();
@@ -55,9 +70,7 @@ public class Server extends UnicastRemoteObject implements PartRepository{
 			for(int i = 0; i < length; i++)
 				subPartsList.add(new SubElementImpl(parts.next(), quantities.next()));			
 		}
-		Part part = new PartImpl(nome, descricao, subPartsList);
-		partRepository.put(part.getPartId(), part);
-		return part;
+		return subPartsList;
 	}
 	
 	

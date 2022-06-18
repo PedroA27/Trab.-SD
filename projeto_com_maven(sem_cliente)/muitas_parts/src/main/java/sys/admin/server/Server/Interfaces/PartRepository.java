@@ -1,7 +1,6 @@
 package sys.admin.server.Server.Interfaces;
 
 import java.util.Collection;
-import java.util.List;
 import java.util.UUID;
 
 import java.rmi.Remote;
@@ -13,4 +12,5 @@ public interface PartRepository extends Remote{
 	int getPartsQuantity() throws RemoteException;
 	Collection<Part> listParts() throws RemoteException;
 	Part addPart(String nome, String descricao, Collection<Part> subParts, Collection<Integer> subPartsQuantity) throws RemoteException;
+	void addSubPartsToPart(UUID partID, Collection<Part> subParts, Collection<Integer> subPartsQuantity) throws RemoteException;
 }
