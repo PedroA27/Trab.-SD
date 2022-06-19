@@ -6,24 +6,28 @@ import java.util.Iterator;
 import java.util.Scanner;
 import java.util.UUID;
 
+import Server.Part;
+import Server.PartRepository;
+import Server.SubPartElement;
+
 public class ClientMain {
 	public static void clearConsole() {
 		System.out.println("\u001b[H\u001b[2J");
 	}
 	
 	public static void printCommands() {
-		System.out.println("Lista de comandos:\nbind : Realiza a troca de servidor\nlistp \ngetp \nshowp \nclearlist \naddsubpart \naddp \nclear");	
+		System.out.println("Lista de comandos:\nbind : Realiza a troca de servidor\nlistp \ngetp \nshowp \nclearlist \naddsubpart \naddp ");	
 	}
 	
 	public static void main(String[] args) throws MalformedURLException, RemoteException, NotBoundException {
 		try (Scanner sc = new Scanner(System.in)) {
 			System.out.println("Insira o nome do servidor: ");
 			String serverName = sc.nextLine();
-//			clearConsole();
+			clearConsole();
 			
 			System.out.println("Insira a porta do servidor: ");
 			String serverPort = sc.nextLine();
-//			clearConsole();
+			clearConsole();
 			
 			String server = "//localhost:";
 					
@@ -36,11 +40,11 @@ public class ClientMain {
 					case "bind":
 						System.out.println("Insira o nome do novo servidor: ");
 						String newServerName = sc.nextLine();
-//						clearConsole();
+						clearConsole();
 						
 						System.out.println("Insira a porta do novo servidor: ");
 						String newServerPort = sc.nextLine();
-//						clearConsole();
+						clearConsole();
 						client.bind(server+newServerPort+"/"+newServerName);
 						break;
 					case "listp":
@@ -52,7 +56,7 @@ public class ClientMain {
 				            System.out.println(iter.next().getName());
 				        }
 						break;
-						
+//						
 						
 					case "getp":
 						System.out.println("Insira o id desejado:\n\n");
@@ -84,12 +88,44 @@ public class ClientMain {
 						}
 						break;
 					case "clearlist":
+						client.clearlist();
+						System.out.println("Lista limpa");	
+						break;
 					case "addsubpart":
+						System.out.println("Insira a quantidade n de unidades da peca atual a serem adicionadas: ");
+						int qtd = Integer.parseInt(sc.nextLine());
+						client.addsubpart(qtd);
+						
+						break;
 					case "addp":
-					case "clear":
+						System.out.println("Insira o nome da part:");
+				        String name = sc.nextLine();
+				        
+				        while(name.isEmpty()) {
+				        	System.out.println("(Nome invalido)Insira o nome da part:");
+					        name = sc.nextLine();
+				        }
+
+				        System.out.println("Insira a descricao da part:");
+				        String description = sc.nextLine();
+				        
+				        while(description.isEmpty()) {
+				        	System.out.println("(Descricao invalida)Insira a descricao da part:");
+					        description = sc.nextLine();
+				        }
+				        client.addp(name, description);
+				        break;
 					default:
+						System.out.println("Comando invalido");
 				}
+				
 			}
+			clearConsole();
+			printCommands();
+			command = sc.nextLine();
+			
+		} catch (Exception e) {
+            
+            e.printStackTrace();
 		}
 	}
-}
