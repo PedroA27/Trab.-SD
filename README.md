@@ -8,5 +8,3 @@ para rodar (dentro da pasta muitas_parts, jdk 8 apenas, maven última versão no
 
 java -cp target/muitas_parts-1.0.jar sys.admin.server.ServerRunner <PORT> <HOST(coloque localhost)> <NOME>
 
-teste simples:
-java -cp target/muitas_parts-1.0.jar sys.admin.client.ClientSimulator

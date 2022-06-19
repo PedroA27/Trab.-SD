@@ -1,0 +1,1 @@
+java -cp target/muitas_parts-1.0.jar sys.admin.server.ServerRunner 1097 localhost serv1

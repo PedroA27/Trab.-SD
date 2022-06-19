@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="pt"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ClientMain.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">muitas_parts</a> &gt; <a href="index.source.html" class="el_package">sys.admin.client</a> &gt; <span class="el_source">ClientMain.java</span></div><h1>ClientMain.java</h1><pre class="source lang-java linenums">package sys.admin.client;
+
+import java.net.MalformedURLException;
+import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.Scanner;
+import java.util.UUID;
+
+import sys.admin.Interfaces.Part;
+
+
+<span class="nc" id="L14">public class ClientMain {</span>
+	public static void clearConsole() {
+<span class="nc" id="L16">		System.out.println(&quot;\u001b[H\u001b[2J&quot;);</span>
+<span class="nc" id="L17">	}</span>
+	
+	public static void printCommands() {
+<span class="nc" id="L20">		System.out.println(&quot;Lista de comandos:\nbind : Realiza a troca de servidor\nlistp \ngetp \nshowp \nclearlist \naddsubpart \naddp &quot;);	</span>
+<span class="nc" id="L21">	}</span>
+	
+	public static void main(String[] args) throws MalformedURLException, RemoteException, NotBoundException {
+<span class="nc" id="L24">		try (Scanner sc = new Scanner(System.in)) {</span>
+<span class="nc" id="L25">			System.out.println(&quot;Insira o nome do servidor: &quot;);</span>
+<span class="nc" id="L26">			String serverName = sc.nextLine();</span>
+<span class="nc" id="L27">			clearConsole();</span>
+			
+<span class="nc" id="L29">			System.out.println(&quot;Insira a porta do servidor: &quot;);</span>
+<span class="nc" id="L30">			String serverPort = sc.nextLine();</span>
+<span class="nc" id="L31">			clearConsole();</span>
+			
+<span class="nc" id="L33">			String server = &quot;//localhost:&quot;;</span>
+					
+<span class="nc" id="L35">			Client client = new Client(server+serverPort+&quot;/&quot;+serverName);</span>
+			
+<span class="nc" id="L37">			printCommands();</span>
+<span class="nc" id="L38">			String command = sc.nextLine();</span>
+<span class="nc bnc" id="L39" title="All 2 branches missed.">			while(!command.equals(&quot;quit&quot;)) {</span>
+<span class="nc bnc" id="L40" title="All 8 branches missed.">				switch(command) {</span>
+					case &quot;bind&quot;:
+<span class="nc" id="L42">						System.out.println(&quot;Insira o nome do novo servidor: &quot;);</span>
+<span class="nc" id="L43">						String newServerName = sc.nextLine();</span>
+<span class="nc" id="L44">						clearConsole();</span>
+						
+<span class="nc" id="L46">						System.out.println(&quot;Insira a porta do novo servidor: &quot;);</span>
+<span class="nc" id="L47">						String newServerPort = sc.nextLine();</span>
+<span class="nc" id="L48">						clearConsole();</span>
+<span class="nc" id="L49">						client.bind(server+newServerPort+&quot;/&quot;+newServerName);</span>
+<span class="nc" id="L50">						break;</span>
+					case &quot;listp&quot;:
+<span class="nc" id="L52">						System.out.println(&quot;Lista de Parts: &quot;);</span>
+<span class="nc" id="L53">						Collection&lt;Part&gt; list = client.listp();</span>
+<span class="nc" id="L54">						Iterator&lt;Part&gt; iter= list.iterator();</span>
+<span class="nc" id="L55">						System.out.println(&quot;Lista de Parts\n\n&quot;);</span>
+<span class="nc bnc" id="L56" title="All 2 branches missed.">						while (iter.hasNext()) {</span>
+<span class="nc" id="L57">				            System.out.println(iter.next().getName());</span>
+				        }
+						break;
+//						
+						
+					case &quot;getp&quot;:
+<span class="nc" id="L63">						System.out.println(&quot;Insira o id desejado:\n\n&quot;);</span>
+						UUID idPart;
+						try {
+<span class="nc" id="L66">							idPart = UUID.fromString(sc.nextLine());</span>
+<span class="nc" id="L67">						} catch (Exception e) {</span>
+<span class="nc" id="L68">							System.out.println(&quot;Id inválido&quot;);</span>
+<span class="nc" id="L69">							break;</span>
+<span class="nc" id="L70">						}</span>
+<span class="nc" id="L71">						Part search = client.getp(idPart);</span>
+<span class="nc bnc" id="L72" title="All 2 branches missed.">						if(search != null) {</span>
+<span class="nc" id="L73">							client.setPart(search);</span>
+						}
+						else{
+<span class="nc" id="L76">							System.out.println(&quot;Part não existente&quot;);</span>
+						}
+<span class="nc" id="L78">						break;</span>
+					case &quot;showp&quot;:
+<span class="nc" id="L80">						Part show = client.getPart();</span>
+<span class="nc bnc" id="L81" title="All 2 branches missed.">						if(show != null) {</span>
+<span class="nc" id="L82">							System.out.println(&quot;Id: &quot; + show.getPartId());</span>
+<span class="nc" id="L83">							System.out.println(&quot;Nome: &quot; + show.getName());</span>
+<span class="nc" id="L84">							System.out.println(&quot;Descrição: &quot; + show.getDescription());</span>
+<span class="nc" id="L85">							System.out.println(&quot;Subparts: &quot; + show.getSubParts());</span>
+						}
+						else {
+<span class="nc" id="L88">							System.out.println(&quot;Part não encontrada&quot;);</span>
+						}
+<span class="nc" id="L90">						break;</span>
+					case &quot;clearlist&quot;:
+<span class="nc" id="L92">						client.clearlist();</span>
+<span class="nc" id="L93">						System.out.println(&quot;Lista limpa&quot;);	</span>
+<span class="nc" id="L94">						break;</span>
+					case &quot;addsubpart&quot;:
+<span class="nc" id="L96">						System.out.println(&quot;Insira a quantidade n de unidades da peca atual a serem adicionadas: &quot;);</span>
+<span class="nc" id="L97">						int qtd = Integer.parseInt(sc.nextLine());</span>
+<span class="nc" id="L98">						client.addsubpart(qtd);</span>
+						
+<span class="nc" id="L100">						break;</span>
+					case &quot;addp&quot;:
+<span class="nc" id="L102">						System.out.println(&quot;Insira o nome da part:&quot;);</span>
+<span class="nc" id="L103">				        String name = sc.nextLine();</span>
+				        
+<span class="nc bnc" id="L105" title="All 2 branches missed.">				        while(name.isEmpty()) {</span>
+<span class="nc" id="L106">				        	System.out.println(&quot;(Nome invalido)Insira o nome da part:&quot;);</span>
+<span class="nc" id="L107">					        name = sc.nextLine();</span>
+				        }
+
+<span class="nc" id="L110">				        System.out.println(&quot;Insira a descricao da part:&quot;);</span>
+<span class="nc" id="L111">				        String description = sc.nextLine();</span>
+				        
+<span class="nc bnc" id="L113" title="All 2 branches missed.">				        while(description.isEmpty()) {</span>
+<span class="nc" id="L114">				        	System.out.println(&quot;(Descricao invalida)Insira a descricao da part:&quot;);</span>
+<span class="nc" id="L115">					        description = sc.nextLine();</span>
+				        }
+<span class="nc" id="L117">				        client.addp(name, description);</span>
+<span class="nc" id="L118">				        break;</span>
+					default:
+<span class="nc" id="L120">						System.out.println(&quot;Comando invalido&quot;);</span>
+				}
+				
+			}
+<span class="nc" id="L124">			clearConsole();</span>
+<span class="nc" id="L125">			printCommands();</span>
+<span class="nc" id="L126">			command = sc.nextLine();</span>
+			
+<span class="nc" id="L128">		} catch (Exception e) {</span>
+            
+<span class="nc" id="L130">            e.printStackTrace();</span>
+<span class="nc" id="L131">		}</span>
+<span class="nc" id="L132">	}</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.4.201905082037</span></div></body></html>

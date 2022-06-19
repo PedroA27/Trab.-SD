@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="pt"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Client.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">muitas_parts</a> &gt; <a href="index.source.html" class="el_package">sys.admin.client</a> &gt; <span class="el_source">Client.java</span></div><h1>Client.java</h1><pre class="source lang-java linenums">package sys.admin.client;
+
+import java.net.MalformedURLException;
+import java.rmi.Naming;
+import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
+import java.util.UUID;
+
+import sys.admin.Interfaces.PartRepository;
+import sys.admin.Interfaces.SubPartElement;
+import sys.admin.Interfaces.Part;
+
+import java.util.Collection;
+import java.util.LinkedList;
+
+
+
+public class Client {
+	PartRepository repository;
+	private Part part;
+	LinkedList&lt;SubPartElement&gt; subParts;
+	
+<span class="nc" id="L23">	public Client(String server) throws MalformedURLException, RemoteException, NotBoundException {</span>
+<span class="nc" id="L24">		this.repository = (PartRepository) Naming.lookup(server);</span>
+<span class="nc" id="L25">		this.part = null;</span>
+<span class="nc" id="L26">		this.subParts = new LinkedList&lt;&gt;();</span>
+<span class="nc" id="L27">	}</span>
+	
+	
+	public void bind(String server) throws MalformedURLException, RemoteException, NotBoundException {
+<span class="nc" id="L31">		this.repository = (PartRepository) Naming.lookup(server);</span>
+	
+<span class="nc" id="L33">	}</span>
+	
+	public Collection&lt;Part&gt; listp() {
+		try {
+<span class="nc" id="L37">			Collection&lt;Part&gt; list = repository.listParts();</span>
+<span class="nc" id="L38">			return list;</span>
+<span class="nc" id="L39">		} catch (RemoteException e) {</span>
+			// TODO Auto-generated catch block
+<span class="nc" id="L41">			e.printStackTrace();</span>
+<span class="nc" id="L42">			return null;</span>
+		}
+		
+	}
+	
+	public Part getp(UUID partId) {
+		try {
+<span class="nc" id="L49">			return repository.getPart(partId);</span>
+<span class="nc" id="L50">		} catch (RemoteException e) {</span>
+			// TODO Auto-generated catch block
+<span class="nc" id="L52">			e.printStackTrace();</span>
+<span class="nc" id="L53">			return null;</span>
+		}
+		
+	}
+	
+	 public void setPart(Part newPart) {
+
+<span class="nc" id="L60">	        this.part = newPart;</span>
+<span class="nc" id="L61">    }</span>
+	 public Part getPart() {
+<span class="nc" id="L63">			return this.part;</span>
+	}
+	 public void clearlist() {
+<span class="nc" id="L66">		 this.subParts.clear();</span>
+<span class="nc" id="L67">	 }</span>
+	 public void addsubpart(int qtd) {
+<span class="nc bnc" id="L69" title="All 2 branches missed.">		 if(this.part == null) {</span>
+<span class="nc" id="L70">			 System.out.println(&quot;Peça não pode ser adicionada&quot;);</span>
+		 }
+		 try {
+<span class="nc" id="L73">			 UUID id = this.part.getPartId();</span>
+<span class="nc bnc" id="L74" title="All 2 branches missed.">			 for (int i = 0; i &lt; subParts.size(); i++) {</span>
+<span class="nc bnc" id="L75" title="All 2 branches missed.">				 if(subParts.get(i).getSubPart().getPartId().equals(id)){</span>
+<span class="nc" id="L76">					 subParts.get(i).addSubPartQuantity(qtd);</span>
+<span class="nc" id="L77">					 i = subParts.size();</span>
+<span class="nc" id="L78">					 return;</span>
+				 }
+			 }
+			 
+			 //criar no server?
+<span class="nc" id="L83">			 SubPartElement newSub = null;</span>
+<span class="nc" id="L84">			 subParts.add(newSub);</span>
+			 
+<span class="nc" id="L86">		 } catch (RemoteException e) {</span>
+			 // TODO Auto-generated catch block
+<span class="nc" id="L88">			 e.printStackTrace();</span>
+<span class="nc" id="L89">		 }</span>
+		
+<span class="nc" id="L91">	 }</span>
+	 
+	 public void addp(String name, String description) {
+		 try {
+<span class="nc" id="L95">			 LinkedList&lt;Part&gt; subP = new LinkedList&lt;&gt;();</span>
+<span class="nc" id="L96">			 LinkedList&lt;Integer&gt; subQtd = new LinkedList&lt;&gt;();</span>
+<span class="nc bnc" id="L97" title="All 2 branches missed.">			 for (int i = 0; i &lt; subParts.size(); i++) {</span>
+<span class="nc" id="L98">				 subP.add(subParts.get(i).getSubPart());</span>
+<span class="nc" id="L99">				 subQtd.add(subParts.get(i).getSubPartQuantity());</span>
+	         }
+<span class="nc" id="L101">			 this.repository.addPart(name, description, subP, subQtd);</span>
+<span class="nc" id="L102">		 }catch (RemoteException e) {</span>
+			 // TODO Auto-generated catch block
+<span class="nc" id="L104">			 e.printStackTrace();</span>
+<span class="nc" id="L105">		 }</span>
+<span class="nc" id="L106">	 }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.4.201905082037</span></div></body></html>
