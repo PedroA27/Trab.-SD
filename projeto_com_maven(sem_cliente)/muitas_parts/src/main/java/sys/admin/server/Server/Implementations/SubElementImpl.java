@@ -26,4 +26,10 @@ public class SubElementImpl implements SubPartElement, Serializable{
         return this.quantity;
     }
     
+    @Override
+	public void addSubPartQuantity(int qtd) {
+		// TODO Auto-generated method stub
+		this.quantity = quantity + qtd;
+	}
+    
 }
