@@ -6,6 +6,7 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.Map;
 import java.util.UUID;
 
 
@@ -55,36 +56,13 @@ public class Server extends UnicastRemoteObject implements PartRepository{
 	//em uma única lista de SubPart's
 	@Override
 	public Part addPart(String nome, String descricao, Collection<Part> subParts, Collection<Integer> subPartsQuantity) throws RemoteException {			
-		LinkedList<SubPartElement> subPartsList = convertToSubElementList(subParts, subPartsQuantity);
-		Part part = new PartImpl(nome, descricao, subPartsList);
+		
+		Part part = new PartImpl(nome, descricao, subParts, subPartsQuantity);
 		partRepository.put(part.getPartId(), part);
 		return part;
 	}
+	
 	//procura uma Part pelo seu id, e se ela existir, unifica e converte as duas coleções em uma de SubPart's,
 	//e adiciona na lista de subParts da Part
-	@Override
-	public void addSubPartsToPart(UUID partID, Collection<Part> subParts, Collection<Integer> subPartsQuantity)
-			throws RemoteException {
-		Part part = partRepository.get(partID);
-		if (part != null) {
-			LinkedList<SubPartElement> subPartsList = convertToSubElementList(subParts, subPartsQuantity);
-			part.getSubParts().addAll(subPartsList);
-		}
-		
-	}
-	//método utilizado pelos dois métodos acima, que serve para unificar e converter as duas coleções,
-	// uma de Part's e outra de suas respectivas quantidades, em uma lista de SubPartElement
-	private LinkedList<SubPartElement> convertToSubElementList(Collection<Part> subParts, Collection<Integer> subPartsQuantity){
-		LinkedList<SubPartElement> subPartsList = new LinkedList<>();
-		if(subParts != null && subPartsQuantity != null){			
-			int length = subParts.size() < subPartsQuantity.size() ? subParts.size() : subPartsQuantity.size();
-			Iterator<Part> parts = subParts.iterator();
-			Iterator<Integer> quantities = subPartsQuantity.iterator();
-			for(int i = 0; i < length; i++)
-				subPartsList.add(new SubElementImpl(parts.next(), quantities.next()));			
-		}
-		return subPartsList;
-	}
-	
 	
 }

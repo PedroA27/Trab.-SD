@@ -4,38 +4,46 @@ import java.util.EnumMap;
 
 import sys.admin.server.Server.Utils.GenericConversor;
 
-
+//Classe ServerConfiguration, que, a partir do enum ServerParamTypes, inicializa dinamicamente 
+//um EnumMap que servirá como um objeto com as propriedades do servidor, dinamicamente,
+//convertendo o parâmetro para o tipo desejado
 public class ServerConfiguration {
-
-<span class="nc" id="L10">    private static ServerParamTypes[] ServerParams = ServerParamTypes.values();</span>
-<span class="nc" id="L11">    private static int ParamsQuantity = ServerParams.length;</span>
+   
+<span class="nc" id="L12">    private static ServerParamTypes[] ServerParams = ServerParamTypes.values();</span>
+<span class="nc" id="L13">    private static int ParamsQuantity = ServerParams.length;</span>
 
     public final EnumMap&lt;ServerParamTypes, Object&gt; Params;
     
-<span class="nc" id="L15">     public ServerConfiguration(String[] params) throws Exception, ServerMissingParamsException{</span>
+<span class="nc" id="L17">     public ServerConfiguration(String[] params) throws Exception, ServerMissingParamsException{</span>
 
-<span class="nc" id="L17">        EnumMap&lt;ServerParamTypes, Object&gt; paramsMap = new EnumMap&lt;ServerParamTypes, Object&gt;(ServerParamTypes.class);</span>
+<span class="nc" id="L19">        EnumMap&lt;ServerParamTypes, Object&gt; paramsMap = new EnumMap&lt;ServerParamTypes, Object&gt;(ServerParamTypes.class);</span>
 
-<span class="nc bnc" id="L19" title="All 2 branches missed.">        if(params.length &lt; ParamsQuantity)</span>
-<span class="nc" id="L20">            throw new ServerMissingParamsException();</span>
+        //Caso parâmetros estejam faltando, lance uma exceção do tipo ServerMissingParamsException
+<span class="nc bnc" id="L22" title="All 2 branches missed.">        if(params.length &lt; ParamsQuantity)</span>
+<span class="nc" id="L23">            throw new ServerMissingParamsException();</span>
       
-<span class="nc bnc" id="L22" title="All 2 branches missed.">        for(int i = 0; i &lt; ParamsQuantity; i++)</span>
-<span class="nc" id="L23">            paramsMap.put(ServerParams[i], GenericConversor.convert(params[i], ServerParams[i].type()));</span>
+         //inicializa dinamicamente o EnumMap, com os parâmetros
+<span class="nc bnc" id="L26" title="All 2 branches missed.">        for(int i = 0; i &lt; ParamsQuantity; i++)</span>
+<span class="nc" id="L27">            paramsMap.put(ServerParams[i], GenericConversor.convert(params[i], ServerParams[i].type()));</span>
 
-<span class="nc" id="L25">        Params = paramsMap;</span>
+<span class="nc" id="L29">        Params = paramsMap;</span>
 
-<span class="nc" id="L27">     }</span>
+<span class="nc" id="L31">     }</span>
+     //método para retornar a url completa do servidor
      public String GetFullUrl(){
-<span class="nc" id="L29">        return &quot;rmi://&quot;+GetUrl()+&quot;:&quot;+GetPort()+&quot;/&quot;+GetName();</span>
+<span class="nc" id="L34">        return &quot;rmi://&quot;+GetUrl()+&quot;:&quot;+GetPort()+&quot;/&quot;+GetName();</span>
      }
+     //obtém o nome do servidor
      public String GetName(){
-<span class="nc" id="L32">        return (String) Params.get(ServerParamTypes.NAME);</span>
+<span class="nc" id="L38">        return (String) Params.get(ServerParamTypes.NAME);</span>
      }
+      //obtém a porta do servidor
      public int GetPort(){
-<span class="nc" id="L35">        return (int) Params.get(ServerParamTypes.PORT);</span>
+<span class="nc" id="L42">        return (int) Params.get(ServerParamTypes.PORT);</span>
      }
+      //obtém a url do servidor
      public String GetUrl(){
-<span class="nc" id="L38">        return (String) Params.get(ServerParamTypes.URL);</span>
+<span class="nc" id="L46">        return (String) Params.get(ServerParamTypes.URL);</span>
      }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.4.201905082037</span></div></body></html>

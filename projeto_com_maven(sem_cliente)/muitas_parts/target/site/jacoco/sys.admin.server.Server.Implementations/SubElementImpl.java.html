@@ -5,22 +5,25 @@ import java.io.Serializable;
 import sys.admin.server.Server.Interfaces.Part;
 import sys.admin.server.Server.Interfaces.SubPartElement;
 
+//classe SubElementImpl, que implementa SubPartElement (classe que retorna um subPart, ou seja, representando
+//uma subPart de uma Part, e quantidade que a Part pai possui dessa subPart) e Serializable (para que
+//seja possível retorno no liente)
 public class SubElementImpl implements SubPartElement, Serializable{
-	private static final long serialVersionUID = 31;//seria o id?
+	private static final long serialVersionUID = 31;
     private Part subPart;
     private int quantity;
-<span class="nc" id="L12">    public SubElementImpl(Part subPart, int quantity){</span>
-<span class="nc" id="L13">        this.subPart = subPart;</span>
-<span class="nc" id="L14">        this.quantity = quantity;</span>
-<span class="nc" id="L15">    }</span>
+<span class="nc" id="L15">    public SubElementImpl(Part subPart, int quantity){</span>
+<span class="nc" id="L16">        this.subPart = subPart;</span>
+<span class="nc" id="L17">        this.quantity = quantity;</span>
+<span class="nc" id="L18">    }</span>
     @Override
     public Part getSubPart() {
-<span class="nc" id="L18">        return this.subPart;</span>
+<span class="nc" id="L21">        return this.subPart;</span>
     }
 
     @Override
     public int getSubPartQuantity() {
-<span class="nc" id="L23">        return this.quantity;</span>
+<span class="nc" id="L26">        return this.quantity;</span>
     }
     
 }

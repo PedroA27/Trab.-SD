@@ -13,5 +13,4 @@ public interface PartRepository extends Remote{
 	int getPartsQuantity() throws RemoteException;
 	Collection<Part> listParts() throws RemoteException;
 	Part addPart(String nome, String descricao, Collection<Part> subParts, Collection<Integer> subPartsQuantity) throws RemoteException;
-	void addSubPartsToPart(UUID partID, Collection<Part> subParts, Collection<Integer> subPartsQuantity) throws RemoteException;
 }
