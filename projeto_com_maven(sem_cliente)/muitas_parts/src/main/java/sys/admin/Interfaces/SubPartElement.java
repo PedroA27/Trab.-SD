@@ -1,4 +1,4 @@
-package sys.admin.server.Server.Interfaces;
+package sys.admin.Interfaces;
 
 import java.rmi.Remote;
 

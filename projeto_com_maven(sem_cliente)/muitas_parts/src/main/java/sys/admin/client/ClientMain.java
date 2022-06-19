@@ -1,3 +1,5 @@
+package sys.admin.client;
+
 import java.net.MalformedURLException;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
@@ -6,9 +8,8 @@ import java.util.Iterator;
 import java.util.Scanner;
 import java.util.UUID;
 
-import Server.Part;
-import Server.PartRepository;
-import Server.SubPartElement;
+import sys.admin.Interfaces.Part;
+
 
 public class ClientMain {
 	public static void clearConsole() {
@@ -129,3 +130,4 @@ public class ClientMain {
             e.printStackTrace();
 		}
 	}
+}

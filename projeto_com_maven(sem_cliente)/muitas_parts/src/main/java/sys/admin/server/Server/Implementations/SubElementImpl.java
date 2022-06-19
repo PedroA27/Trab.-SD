@@ -2,8 +2,8 @@ package sys.admin.server.Server.Implementations;
 
 import java.io.Serializable;
 
-import sys.admin.server.Server.Interfaces.Part;
-import sys.admin.server.Server.Interfaces.SubPartElement;
+import sys.admin.Interfaces.Part;
+import sys.admin.Interfaces.SubPartElement;
 
 //classe SubElementImpl, que implementa SubPartElement (classe que retorna um subPart, ou seja, representando
 //uma subPart de uma Part, e quantidade que a Part pai possui dessa subPart) e Serializable (para que

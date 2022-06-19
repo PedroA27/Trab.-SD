@@ -8,9 +8,9 @@ import java.util.Collection;
 import java.util.LinkedList;
 import java.util.UUID;
 
-import sys.admin.server.Server.Interfaces.Part;
-import sys.admin.server.Server.Interfaces.PartRepository;
-import sys.admin.server.Server.Interfaces.SubPartElement;
+import sys.admin.Interfaces.Part;
+import sys.admin.Interfaces.PartRepository;
+import sys.admin.Interfaces.SubPartElement;
 
 
 public class ClientSimulator {

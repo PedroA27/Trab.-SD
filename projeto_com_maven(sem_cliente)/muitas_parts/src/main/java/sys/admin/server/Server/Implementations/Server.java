@@ -6,9 +6,8 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.UUID;
 
-
-import sys.admin.server.Server.Interfaces.Part;
-import sys.admin.server.Server.Interfaces.PartRepository;
+import sys.admin.Interfaces.Part;
+import sys.admin.Interfaces.PartRepository;
 import sys.admin.server.Server.ServerConfiguration.ServerConfiguration;
 import sys.admin.server.Server.ServerConfiguration.ServerMissingParamsException;
 

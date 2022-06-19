@@ -8,8 +8,8 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.UUID;
 
-import sys.admin.server.Server.Interfaces.Part;
-import sys.admin.server.Server.Interfaces.SubPartElement;
+import sys.admin.Interfaces.Part;
+import sys.admin.Interfaces.SubPartElement;
 
 //Implementação da interface Part
 public class PartImpl implements Part, Serializable{

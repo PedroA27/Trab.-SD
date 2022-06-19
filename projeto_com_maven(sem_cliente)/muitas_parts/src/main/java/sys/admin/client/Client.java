@@ -1,15 +1,18 @@
+package sys.admin.client;
+
 import java.net.MalformedURLException;
 import java.rmi.Naming;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
-import java.util.Scanner;
 import java.util.UUID;
+
+import sys.admin.Interfaces.PartRepository;
+import sys.admin.Interfaces.SubPartElement;
+import sys.admin.Interfaces.Part;
+
 import java.util.Collection;
 import java.util.LinkedList;
 
-import Server.Part;
-import Server.PartRepository;
-import Server.SubPartElement;
 
 
 public class Client {
