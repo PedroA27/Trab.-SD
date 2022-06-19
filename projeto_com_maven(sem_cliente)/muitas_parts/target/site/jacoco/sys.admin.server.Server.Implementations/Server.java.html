@@ -4,15 +4,11 @@ import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.Map;
 import java.util.UUID;
 
 
 import sys.admin.server.Server.Interfaces.Part;
 import sys.admin.server.Server.Interfaces.PartRepository;
-import sys.admin.server.Server.Interfaces.SubPartElement;
 import sys.admin.server.Server.ServerConfiguration.ServerConfiguration;
 import sys.admin.server.Server.ServerConfiguration.ServerMissingParamsException;
 
@@ -29,27 +25,27 @@ public class Server extends UnicastRemoteObject implements PartRepository{
 
 	//inicializa a estrutura de dados, bem como as configurações do servidor com base em
 	//um array de String, que são os parâmetros passados por linha de comando
-<span class="nc" id="L32">	public Server(String[] args) throws ServerMissingParamsException, Exception{</span>
-<span class="nc" id="L33">		partRepository = new HashMap&lt;&gt;();</span>
-<span class="nc" id="L34">		serverConfiguration = new ServerConfiguration(args);	</span>
-<span class="nc" id="L35">	}</span>
+<span class="nc" id="L28">	public Server(String[] args) throws ServerMissingParamsException, Exception{</span>
+<span class="nc" id="L29">		partRepository = new HashMap&lt;&gt;();</span>
+<span class="nc" id="L30">		serverConfiguration = new ServerConfiguration(args);	</span>
+<span class="nc" id="L31">	}</span>
 
 	@Override
 	public Part getPart(UUID id) throws RemoteException {
-<span class="nc" id="L39">		return partRepository.get(id);</span>
+<span class="nc" id="L35">		return partRepository.get(id);</span>
 	}
 
 	@Override
 	public String getName() throws RemoteException {
-<span class="nc" id="L44">		return serverConfiguration.GetName();</span>
+<span class="nc" id="L40">		return serverConfiguration.GetName();</span>
 	}
 	@Override
 	public int getPartsQuantity() throws RemoteException{
-<span class="nc" id="L48">		return partRepository.size();</span>
+<span class="nc" id="L44">		return partRepository.size();</span>
 	}
 	@Override
 	public Collection&lt;Part&gt; listParts() throws RemoteException {
-<span class="nc" id="L52">		return partRepository.values();</span>
+<span class="nc" id="L48">		return partRepository.values();</span>
 	}
 	//aqui, o cliente passa os parâmetros para criação de uma nova Part nese repositório, bem como
 	//passa como parâmetros duas coleções, uma de Part's e outra de Integer's, que serão convertidos
@@ -57,13 +53,10 @@ public class Server extends UnicastRemoteObject implements PartRepository{
 	@Override
 	public Part addPart(String nome, String descricao, Collection&lt;Part&gt; subParts, Collection&lt;Integer&gt; subPartsQuantity) throws RemoteException {			
 		
-<span class="nc" id="L60">		Part part = new PartImpl(nome, descricao, subParts, subPartsQuantity);</span>
-<span class="nc" id="L61">		partRepository.put(part.getPartId(), part);</span>
-<span class="nc" id="L62">		return part;</span>
+<span class="nc" id="L56">		Part part = new PartImpl(nome, descricao, subParts, subPartsQuantity);</span>
+<span class="nc" id="L57">		partRepository.put(part.getPartId(), part);</span>
+<span class="nc" id="L58">		return part;</span>
 	}
-	
-	//procura uma Part pelo seu id, e se ela existir, unifica e converte as duas coleções em uma de SubPart's,
-	//e adiciona na lista de subParts da Part
 	
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.4.201905082037</span></div></body></html>

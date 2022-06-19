@@ -1,6 +1,5 @@
 package sys.admin.client;
 
-
 import java.net.MalformedURLException;
 import java.rmi.Naming;
 import java.rmi.NotBoundException;
@@ -12,7 +11,6 @@ import java.util.UUID;
 import sys.admin.server.Server.Interfaces.Part;
 import sys.admin.server.Server.Interfaces.PartRepository;
 import sys.admin.server.Server.Interfaces.SubPartElement;
-
 
 
 public class ClientSimulator {

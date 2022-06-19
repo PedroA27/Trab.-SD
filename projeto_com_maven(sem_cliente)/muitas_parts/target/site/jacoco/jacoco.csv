@@ -1,10 +1,10 @@
 GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
 muitas_parts,sys.admin.server.Server.Implementations,PartImpl,123,0,16,0,34,0,19,0,11,0
 muitas_parts,sys.admin.server.Server.Implementations,Server,49,0,0,0,11,0,6,0,6,0
-muitas_parts,sys.admin.server.Server.Implementations,SubElementImpl,15,0,0,0,6,0,3,0,3,0
+muitas_parts,sys.admin.server.Server.Implementations,SubElementImpl,20,0,0,0,7,0,4,0,4,0
 muitas_parts,sys.admin.server,ServerRunner,30,0,0,0,10,0,3,0,3,0
 muitas_parts,sys.admin.server.Server.ServerConfiguration,ServerMissingParamsException,4,0,0,0,2,0,1,0,1,0
 muitas_parts,sys.admin.server.Server.ServerConfiguration,ServerParamTypes,48,0,0,0,8,0,3,0,3,0
-muitas_parts,sys.admin.server.Server.ServerConfiguration,ServerConfiguration,85,0,4,0,14,0,8,0,6,0
+muitas_parts,sys.admin.server.Server.ServerConfiguration,ServerConfiguration,84,0,4,0,14,0,8,0,6,0
 muitas_parts,sys.admin.server.Server.Utils,GenericConversor,24,0,2,0,2,0,3,0,2,0
 muitas_parts,sys.admin.client,ClientSimulator,144,0,4,0,26,0,4,0,2,0

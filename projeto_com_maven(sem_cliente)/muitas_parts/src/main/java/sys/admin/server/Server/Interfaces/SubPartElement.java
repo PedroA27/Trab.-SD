@@ -6,4 +6,5 @@ import java.rmi.Remote;
 public interface SubPartElement extends Remote{
     public Part getSubPart();
     public int getSubPartQuantity();
+    public void addSubPartQuantity(int quantity);
 }

@@ -4,15 +4,11 @@ import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.Map;
 import java.util.UUID;
 
 
 import sys.admin.server.Server.Interfaces.Part;
 import sys.admin.server.Server.Interfaces.PartRepository;
-import sys.admin.server.Server.Interfaces.SubPartElement;
 import sys.admin.server.Server.ServerConfiguration.ServerConfiguration;
 import sys.admin.server.Server.ServerConfiguration.ServerMissingParamsException;
 
@@ -61,8 +57,5 @@ public class Server extends UnicastRemoteObject implements PartRepository{
 		partRepository.put(part.getPartId(), part);
 		return part;
 	}
-	
-	//procura uma Part pelo seu id, e se ela existir, unifica e converte as duas coleções em uma de SubPart's,
-	//e adiciona na lista de subParts da Part
 	
 }
