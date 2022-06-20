@@ -87,12 +87,12 @@ public class PartImpl implements Part, Serializable{
 	public void setDescription(String description) {
 		this.description = description;		
 	}
-
+	//método para retornar se a peça é primitiva ou não, com base no tamanho da sua lista de subParts
 	@Override
 	public boolean isPrimitive() throws RemoteException {
-		return this.subParts.size() == 0;
+		return this.subParts.isEmpty();
 	}
-
+	//adiciona subParts ao Map, com base em duas coleções: uma com as subParts, e a outra com as quantidades de cada subPart
 	protected void addSubParts(Collection<Part> subParts, Collection<Integer> quantitites) throws RemoteException {
 		if(subParts != null && quantitites != null){			
 			int length = subParts.size() < quantitites.size() ? subParts.size() : quantitites.size();

@@ -50,7 +50,7 @@ public class Server extends UnicastRemoteObject implements PartRepository{
 	}
 	//aqui, o cliente passa os parâmetros para criação de uma nova Part nese repositório, bem como
 	//passa como parâmetros duas coleções, uma de Part's e outra de Integer's, que serão convertidos
-	//em uma única lista de SubPart's
+	//em um único Map de SubPart's
 	@Override
 	public Part addPart(String nome, String descricao, Collection<Part> subParts, Collection<Integer> subPartsQuantity) throws RemoteException {			
 		
